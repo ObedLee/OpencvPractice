@@ -7,6 +7,9 @@ import cv2
 def histogram_slicing(img, lowerb, upperb):
 
 	# 코드 작성
+	skin_mask = cv2.inRange(img, lowerb, upperb)
+	skin_mask = cv2.GaussianBlur(skin_mask, (3, 3), 0)
+	dst = cv2.bitwise_and(img, img, mask=skin_mask)
 
 	return dst
 
@@ -40,6 +43,9 @@ if __name__ == '__main__' :
 	 
 		# HSV 칼라 모델로 변환한 후에 피부 영역 검출
 		# 개별 코드 작성
+		hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+		dst = histogram_slicing(hsv, lowerb, upperb)
+		skin = cv2.cvtColor(dst, cv2.COLOR_HSV2BGR)
 
 		# 결과 영상 출력
 		cv2.imshow("images", np.hstack([frame, skin]))

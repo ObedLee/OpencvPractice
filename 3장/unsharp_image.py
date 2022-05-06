@@ -7,6 +7,12 @@ from handle_channel_roi import display_image
 
 def unsharp_image(img, alpha=1.1, beta=0.5) :
 	# 개별 작성
+	sigma = 10
+	dst = img.copy()
+	dst = cv2.GaussianBlur(dst, (0, 0), sigma)
+	dst = cv2.addWeighted(img, alpha, dst, -beta, 0)
+
+	return dst
 
 if __name__ == '__main__' :
 	# 명령행 인자 처리

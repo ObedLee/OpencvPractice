@@ -10,7 +10,11 @@ def histogram(img):
 	hist = []
 
 	# 코드 작성
-
+	if len(img.shape) == 1:
+		hist.append(cv2.calcHist([img], [0], None, [256], [0, 256]))
+	elif len(img.shape) == 3:
+		for i in range(len(img.shape)):
+			hist.append(cv2.calcHist([img], [i], None, [256], [0, 256]))
 
 	# 결과 히스토그램 반환
 	return hist

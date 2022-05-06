@@ -6,6 +6,7 @@ from matplotlib import pyplot as plt
 
 def histogram2D(img):
 
+	hist = cv2.calcHist([img], [0, 1], None, [180, 256], [0, 180, 0, 256])
 
 	# 결과 히스토그램 반환
 	return hist
